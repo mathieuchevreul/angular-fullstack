@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { BusinessService } from '../business.service';  
 
 @Component({
@@ -10,7 +12,9 @@ import { BusinessService } from '../business.service';
 export class GstAddComponent implements OnInit {
 
   angForm: FormGroup;
-  constructor(private fb: FormBuilder, private bs: BusinessService) {
+  constructor(private fb: FormBuilder,
+              private bs: BusinessService,
+              private router: Router) {
     this.createForm();
   }
 
@@ -24,6 +28,12 @@ export class GstAddComponent implements OnInit {
 
   addBusiness(person_name, busines_name, business_gst_number) {
     this.bs.addBusiness(person_name, busines_name, business_gst_number);
+    
+    setTimeout(() => 
+      {
+          this.router.navigate(['business']);
+      },
+      50);
   }
   
   ngOnInit() {
